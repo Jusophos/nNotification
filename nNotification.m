@@ -251,12 +251,14 @@
     
     
     animatingView.alpha = 0.0;
+    animatingView.transform = CGAffineTransformMakeScale(1.5, 1.5);
     [window addSubview:animatingView];
     
     [UIView beginAnimations:@"ShowMessageView" context:NULL];
     [UIView setAnimationDuration:0.2];
     
     animatingView.alpha = 1.0;
+    animatingView.transform = CGAffineTransformMakeScale(1, 1);
     
     [UIView commitAnimations];
 
