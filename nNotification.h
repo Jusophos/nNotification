@@ -26,7 +26,8 @@ typedef struct nNotificationExtended nNotificationExtended;
     // Helpers
     NSTimer *scheduledTimerShow;
     NSTimer *scheduledTimerHide;
-    bool currentlyAnimating;
+    BOOL currentlyAnimating;
+    BOOL createdViaAutorelease;
 }
 
 // Properties
@@ -49,6 +50,7 @@ typedef struct nNotificationExtended nNotificationExtended;
 
 #pragma mark - Contructors
 - (id)initWithMessage:(NSString *)message;
+- (id)initWithMessage:(NSString *)message autoreleaseFlag:(BOOL)flag;
 
 #pragma mark - Actions
 - (void)show;

@@ -38,7 +38,7 @@
 #pragma mark - Accessors
 + (id)notifcationWithMessage:(NSString *)message {
     
-    return [[nNotification alloc] initWithMessage:message];
+    return [[nNotification alloc] initWithMessage:message autoreleaseFlag:YES];
 }
 
 #pragma mark - Contructors
@@ -59,12 +59,23 @@
     return self;    
 }
 
+- (id)initWithMessage:(NSString *)message autoreleaseFlag:(BOOL)flag {
+    
+    if ((self = [self initWithMessage:message])) {
+        
+        createdViaAutorelease = flag;
+    }
+        
+    return self;
+}
+
 #pragma mark - Memory management
 - (id)init {
     
     if ((self = [super init])) {
         
         _showingTime = 2.5;
+        createdViaAutorelease = NO;
     }
     
     return self;
@@ -119,6 +130,11 @@
 #pragma mark - UI
 - (void)destroyHUD {
     
+    if (textLabel == nil) {
+        
+        return;
+    }
+    
     [textLabel removeFromSuperview];
     [messageView removeFromSuperview];
     [backgroundHUDView removeFromSuperview];
@@ -130,6 +146,12 @@
     textLabel = nil;
     messageView = nil;
     backgroundHUDView = nil;    
+    
+    if (createdViaAutorelease == YES) {
+        
+        [self release];
+        return;
+    }
 }
 
 - (void)buildHUD {
