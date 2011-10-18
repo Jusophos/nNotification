@@ -239,15 +239,26 @@
 
     UIWindow *window = [[[UIApplication sharedApplication] windows] objectAtIndex:0];    
     
+    UIView *animatingView;
     if (_modal) {
 
-        [window addSubview:backgroundHUDView];        
+        animatingView = backgroundHUDView;
         
     } else {
         
-        [window addSubview:messageView];
+        animatingView = messageView;
     }
     
+    
+    animatingView.alpha = 0.0;
+    [window addSubview:animatingView];
+    
+    [UIView beginAnimations:@"ShowMessageView" context:NULL];
+    [UIView setAnimationDuration:0.2];
+    
+    animatingView.alpha = 1.0;
+    
+    [UIView commitAnimations];
 
     
     scheduledTimerHide = [[NSTimer timerWithTimeInterval:_showingTime target:self selector:@selector(hideTrigger:) userInfo:nil repeats:NO] retain];
