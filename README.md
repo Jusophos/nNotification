@@ -15,7 +15,7 @@ Inspired by Toast from Android.
 2. Add **QuartzCore** framework to your project: Click on your project, choose your target, click on "Build Phases", choose "Link Binary With Libraries" and add it via "+".
 3. Import it where do you want to use it:
 
-	#import "nNotification.h"
+`#import "nNotification.h"`
 
 ## Usage
 ### Simple use
