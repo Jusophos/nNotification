@@ -65,5 +65,7 @@ typedef struct nNotificationExtended nNotificationExtended;
 #pragma mark - Helper
 - (void)showTrigger:(NSTimer *)timer;
 - (void)hideTrigger:(NSTimer *)timer;
+- (void)didHideHUD;
+- (void)kill;
 
 @end

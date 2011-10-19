@@ -7,6 +7,8 @@
 
 #import "nNotification.h"
 
+static nNotification *nNotificationShowing = nil;
+
 @implementation nNotification
 
 // Properties
@@ -32,7 +34,7 @@
     notification.width = width;
     notification.height = height;
     
-    [notification show]; 
+    [notification show];     
 }
 
 #pragma mark - Accessors
@@ -86,6 +88,9 @@
     [self destroyHUD];
     [scheduledTimerHide release];
     [scheduledTimerShow release];
+    
+    NSLog(@"Test: %@", nNotificationShowing);
+    
     [super dealloc];
 }
 
@@ -235,8 +240,24 @@
 
 - (void)showHUD {
     
+    if (nNotificationShowing != nil) {
+        
+        nNotification *killingNotification = nNotificationShowing;
+        
+        [UIView beginAnimations:@"KillingNotification" context:NULL];
+        [UIView setAnimationDuration:0.2];
+        [UIView setAnimationDidStopSelector:@selector(didHideHUD)];
+        
+        [killingNotification kill];
+        
+        [UIView commitAnimations];
+    }
+        
+    nNotificationShowing = self;
+    
+    
     [self buildHUD];
-
+    
     UIWindow *window = [[[UIApplication sharedApplication] windows] objectAtIndex:0];    
     
     UIView *animatingView;
@@ -248,7 +269,6 @@
         
         animatingView = messageView;
     }
-    
     
     animatingView.alpha = 0.0;
     animatingView.transform = CGAffineTransformMakeScale(1.5, 1.5);
@@ -269,10 +289,12 @@
 
 - (void)hideHUD {
     
+    nNotificationShowing = NO;
+    
     [UIView beginAnimations:@"nNotificationHide" context:NULL];
     [UIView setAnimationDuration:0.5];
     [UIView setAnimationDelegate:self];
-    [UIView setAnimationDidStopSelector:@selector(destroyHUD)];
+    [UIView setAnimationDidStopSelector:@selector(didHideHUD)];
     
     backgroundHUDView.alpha     = 0.0;
     messageView.alpha           = 0.0;
@@ -291,6 +313,29 @@
 - (void)hideTrigger:(NSTimer *)timer {
     
     [self hideHUD];
+}
+
+- (void)didHideHUD {
+    
+    [self destroyHUD];
+}
+
+- (void)kill {
+    
+    [scheduledTimerHide invalidate];
+    [scheduledTimerShow invalidate];
+    
+    [UIView beginAnimations:@"Notification" context:NULL];
+    [UIView setAnimationDuration:0.2];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationDidStopSelector:@selector(didHideHUD)];
+    
+    backgroundHUDView.alpha     = 0.0;
+    messageView.alpha           = 0.0;
+    
+    messageView.transform = CGAffineTransformMakeScale(0.0, 0.0);
+    
+    [UIView commitAnimations];      
 }
 
 @end
