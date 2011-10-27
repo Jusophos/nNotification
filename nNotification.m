@@ -16,7 +16,7 @@ static nNotification *nNotificationShowing = nil;
 @synthesize width = _width;
 @synthesize height = _height;
 @synthesize delay = _delay;
-@synthesize showingTime = _showingTime;
+@synthesize duration = _duration;
 @synthesize modal = _modal;
 
 // Extended
@@ -76,7 +76,7 @@ static nNotification *nNotificationShowing = nil;
     
     if ((self = [super init])) {
         
-        _showingTime = 2.5;
+        _duration = 2.5;
         createdViaAutorelease = NO;
     }
     
@@ -283,7 +283,7 @@ static nNotification *nNotificationShowing = nil;
     [UIView commitAnimations];
 
     
-    scheduledTimerHide = [[NSTimer timerWithTimeInterval:_showingTime target:self selector:@selector(hideTrigger:) userInfo:nil repeats:NO] retain];
+    scheduledTimerHide = [[NSTimer timerWithTimeInterval:_duration target:self selector:@selector(hideTrigger:) userInfo:nil repeats:NO] retain];
     [[NSRunLoop currentRunLoop] addTimer:scheduledTimerHide forMode:NSDefaultRunLoopMode];
 }
 

@@ -35,7 +35,7 @@ typedef struct nNotificationExtended nNotificationExtended;
 @property (readwrite, assign) float width;
 @property (readwrite, assign) float height;
 @property (readwrite, assign) float delay;
-@property (readwrite, assign) float showingTime;
+@property (readwrite, assign) float duration;
 @property (readwrite, assign) BOOL modal;
 
 // Extended
