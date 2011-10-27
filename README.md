@@ -29,7 +29,7 @@ Inspired by Toast from Android.
 	notification.height = 200;
 	notification.modal = YES;
 	notification.delay = 3;
-	notification.showingTime = 5;
+	notification.duration = 5;
 	[notification show];
 
 	// And you can customize UI
@@ -48,9 +48,9 @@ Inspired by Toast from Android.
 
 `notification.message = @"Your Message!";`
 
-**showingTime**: Defines how long (time -> seconds) the dialog will be shown. Default is 2.5 seconds.
+**duration**: Defines how long (time -> seconds) the dialog will be shown. Default is 2.5 seconds.
 
-`notification.showingTime = 4.0;`
+`notification.duration = 4.0;`
 
 **width**: Defines the width of the shown message dialog.
 
