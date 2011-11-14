@@ -1,8 +1,8 @@
 # nNotification 
 ## Overview
-Author: Richard Jung
-Version: 1.1
-State: Beta
+* Author: Richard Jung
+* Version: 1.1
+* State: Beta
 
 ## About
 nNotification is an iOS class to show a message for a specific time. It is very easy to use and a elegant way to inform the user about any information.
