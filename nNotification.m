@@ -258,7 +258,7 @@ static nNotification *nNotificationShowing = nil;
     
     [self buildHUD];
     
-    UIWindow *window = [[[UIApplication sharedApplication] windows] objectAtIndex:0];    
+    UIWindow *window = [[[UIApplication sharedApplication] windows] lastObject];    
     
     UIView *animatingView;
     if (_modal) {
