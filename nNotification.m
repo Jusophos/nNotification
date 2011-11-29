@@ -52,8 +52,8 @@ static nNotification *nNotificationShowing = nil;
         
         // Extended
         nNotificationExtended extended;
-        extended.modalBackgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.7];
-        extended.dialogBackgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
+        extended.modalBackgroundColor = [[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.7] retain];
+        extended.dialogBackgroundColor = [[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0] retain];
         
         self.extended = extended;
     }
